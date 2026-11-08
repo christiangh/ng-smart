@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-smart-input-fields-app": [
+      "ng-smart-input-fields": [
         "libs/ng-smart-input-fields/src/index.ts"
       ]
     }
