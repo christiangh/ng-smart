@@ -2,7 +2,7 @@
   "name": "ng-smart-input-fields",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/ng-smart-input-fields/src",
-  "prefix": "smart",
+  "prefix": "ng-smart",
   "projectType": "library",
   "tags": [],
   "targets": {
