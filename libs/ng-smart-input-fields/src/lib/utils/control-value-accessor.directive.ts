@@ -10,6 +10,7 @@ import {
     NgControl,
     NgModel,
 } from '@angular/forms';
+import { NG_SMART_ERROR_RESOLVER } from './error-messages';
 
 /**
  * Base class for every NG Smart field.
@@ -26,12 +27,22 @@ export abstract class ControlValueAccessorDirective implements ControlValueAcces
     label = input<string>('');
 
     computedLabel = computed<string>(this.getComputedLabelFn());
-    getErrors = signal<string[]>([]);
+    // Signals read by the error resolver (e.g. the active language) also trigger a recompute.
+    getErrors = computed<string[]>(() => {
+        this._errorsVersion();
+        const errors = this.control?.errors || {};
+        const label = this.computedLabel();
+
+        return Object.entries(errors).map(([key, error]) => this._errorResolver({ key, error, label }));
+    });
 
     private control!: FormControl;
+    // FormControl errors are not signals: bumped on every status change so getErrors recomputes.
+    private _errorsVersion = signal(0);
 
     protected _destroyRef = inject(DestroyRef);
     protected _injector = inject(Injector);
+    protected _errorResolver = inject(NG_SMART_ERROR_RESOLVER);
 
     get formControl(): FormControl {
         return this.control;
@@ -92,12 +103,7 @@ export abstract class ControlValueAccessorDirective implements ControlValueAcces
     }
 
     updateFieldErrors() {
-        const currentErrorsOnField = Object.keys(this.formControl.errors || {});
-        this.getErrors.set(
-            currentErrorsOnField.map(error => {
-                return `${this.computedLabel() ? this.computedLabel() : 'The field'} ${error}`;
-            })
-        );
+        this._errorsVersion.update(version => version + 1);
     }
 
     getValue(): unknown {

@@ -14,12 +14,12 @@ export class FormsBoardComponent {
     smartFormGroup: FormGroup = new FormGroup({
       textInput: new FormControl<string>(''),
       textInputDefault: new FormControl<string>('Default text'),
-      textInputRequired: new FormControl<string>('', [Validators.required]),
+      textInputRequired: new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
     });
 
     textInputControl = new FormControl('');
     textInputDefaultControl = new FormControl('Default value by formControl');
-    textInputRequiredControl = new FormControl('', [Validators.required]);
+    textInputRequiredControl = new FormControl('', [Validators.required, Validators.minLength(3)]);
 
     textInputNgModel = '';
     textInputDefaultNgModel = 'Default value by ngModel';
