@@ -1,15 +1,22 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { computed, DestroyRef, Directive, inject, Injector, input, Input, OnInit, signal } from '@angular/core';
+import { computed, DestroyRef, Directive, inject, Injector, input, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ControlValueAccessor, FormControl, FormControlName, FormGroupDirective, NgControl, NgModel } from '@angular/forms';
 
-@Directive({
-    selector: '[ngSmartControlValueAccessor]',
-    standalone: true,
-})
-export class ControlValueAccessorDirective implements ControlValueAccessor, OnInit {
+/**
+ * Base class for every NG Smart field.
+ *
+ * Instead of bridging values through the ControlValueAccessor callbacks, it resolves the
+ * FormControl the host is bound to (formControlName, ngModel, an injected control, or a new
+ * standalone one) and exposes it as `formControl`, so the inner Material input can bind to
+ * that same control. Validators, touched state and errors are shared for free.
+ *
+ * It has no selector: it is not used in templates, only extended by field components.
+ */
+@Directive()
+export abstract class ControlValueAccessorDirective implements ControlValueAccessor, OnInit {
     label = input<string>('');
-    @Input() injectedFormControl?: FormControl;
+    injectedFormControl = input<FormControl | undefined>(undefined);
 
     computedLabel = computed<string>(this.getComputedLabelFn());
     getErrors = signal<string[]>([]);
@@ -43,8 +50,10 @@ export class ControlValueAccessorDirective implements ControlValueAccessor, OnIn
     }
 
     setFormControl() {
-        if (this.injectedFormControl) {
-            this.control = this.injectedFormControl;
+        const injectedFormControl = this.injectedFormControl();
+
+        if (injectedFormControl) {
+            this.control = injectedFormControl;
             return;
         }
 
@@ -64,7 +73,7 @@ export class ControlValueAccessorDirective implements ControlValueAccessor, OnIn
             } else {
                 this.control = new FormControl();
             }
-        } catch (err) {
+        } catch {
             this.control = new FormControl();
         }
     }
@@ -78,19 +87,20 @@ export class ControlValueAccessorDirective implements ControlValueAccessor, OnIn
     }
 
     updateFieldErrors() {
-        const errorList = this.formControl.errors || {};
         const currentErrorsOnField = Object.keys(this.formControl.errors || {});
         this.getErrors.set(
             currentErrorsOnField.map(error => {
-                return `${this.computedLabel() ? this.computedLabel() : "The field"} ${error}`
+                return `${this.computedLabel() ? this.computedLabel() : 'The field'} ${error}`;
             })
         );
     }
 
-    getValue(): any {
+    getValue(): unknown {
         return this.control.value;
     }
 
+    // The ControlValueAccessor callbacks are intentionally empty: the field shares the parent's
+    // FormControl with its inner input, so there is nothing to bridge.
     writeValue() {}
     registerOnChange() {}
     registerOnTouched() {}

@@ -5,12 +5,12 @@
 
     <input
         matInput
-        [type]="type || 'text'"
+        [type]="type() || 'text'"
         [formControl]="formControl"
         class="ng-smart-input__input"
-        [placeholder]="placeholder"
-        [attr.autocomplete]="autocomplete ? autocomplete : null" />
-        
+        [placeholder]="placeholder()"
+        [attr.autocomplete]="autocomplete() ? autocomplete() : null" />
+
     <mat-error class="ng-smart-input__error" [title]="getErrors()">
         {{ getErrors() }}
     </mat-error>

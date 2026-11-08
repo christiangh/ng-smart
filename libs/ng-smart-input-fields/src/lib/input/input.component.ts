@@ -1,5 +1,4 @@
-
-import { Component, computed, forwardRef, Input } from '@angular/core';
+import { Component, computed, forwardRef, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -21,9 +20,9 @@ import { NgSmartInputType } from './input.model';
     ],
 })
 export class NgSmartInputComponent extends ControlValueAccessorDirective {
-    @Input() placeholder = '';
-    @Input() type: NgSmartInputType = 'text';
-    @Input() autocomplete: string | null = null;
+    placeholder = input<string>('');
+    type = input<NgSmartInputType>('text');
+    autocomplete = input<string | null>(null);
 
     getClasses = computed<string>(() => {
         const classes: string[] = [];
