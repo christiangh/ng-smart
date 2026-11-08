@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { FormsBoardComponent } from './forms-board.component';
 
 describe('FormsBoardComponent', () => {
@@ -8,6 +9,7 @@ describe('FormsBoardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FormsBoardComponent],
+      providers: [provideNoopAnimations()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FormsBoardComponent);
