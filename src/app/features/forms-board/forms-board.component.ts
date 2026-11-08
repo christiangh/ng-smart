@@ -17,9 +17,9 @@ export class FormsBoardComponent {
       textInputRequired: new FormControl<string>('', [Validators.required]),
     });
 
-    textInputInjected = new FormControl('');
-    textInputDefaultInjected = new FormControl('Default and injected value');
-    textInputRequiredInjected = new FormControl('', [Validators.required]);
+    textInputControl = new FormControl('');
+    textInputDefaultControl = new FormControl('Default value by formControl');
+    textInputRequiredControl = new FormControl('', [Validators.required]);
 
     textInputNgModel = '';
     textInputDefaultNgModel = 'Default value by ngModel';

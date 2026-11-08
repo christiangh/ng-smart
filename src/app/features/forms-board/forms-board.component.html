@@ -19,18 +19,18 @@
 
     <section class="form-control-section board-section">
         <div class="board-header">
-            <h4>Form control injection</h4>
+            <h4>Form control</h4>
         </div>
         <div class="board-body">
             <div class="smart-input-fields-container">
-                <ng-smart-input label="Text input field" [injectedFormControl]="textInputInjected"></ng-smart-input>
-                <ng-smart-input label="Default text" [injectedFormControl]="textInputDefaultInjected"></ng-smart-input>
-                <ng-smart-input label="Required text" [injectedFormControl]="textInputRequiredInjected"></ng-smart-input>
+                <ng-smart-input label="Text input field" [formControl]="textInputControl"></ng-smart-input>
+                <ng-smart-input label="Default text" [formControl]="textInputDefaultControl"></ng-smart-input>
+                <ng-smart-input label="Required text" [formControl]="textInputRequiredControl"></ng-smart-input>
             </div>
             <div class="blackboard">
-                <p>Text input field (injected): <span>{{ textInputInjected.value }}</span></p>
-                <p>Default text (injected): <span>{{ textInputDefaultInjected.value }}</span></p>
-                <p>Required text (injected): <span>{{ textInputRequiredInjected.value }}</span></p>
+                <p>Text input field (formControl): <span>{{ textInputControl.value }}</span></p>
+                <p>Default text (formControl): <span>{{ textInputDefaultControl.value }}</span></p>
+                <p>Required text (formControl): <span>{{ textInputRequiredControl.value }}</span></p>
             </div>
         </div>
     </section>

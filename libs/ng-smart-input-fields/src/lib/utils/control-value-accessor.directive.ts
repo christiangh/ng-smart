@@ -1,13 +1,21 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { computed, DestroyRef, Directive, inject, Injector, input, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ControlValueAccessor, FormControl, FormControlName, FormGroupDirective, NgControl, NgModel } from '@angular/forms';
+import {
+    ControlValueAccessor,
+    FormControl,
+    FormControlDirective,
+    FormControlName,
+    FormGroupDirective,
+    NgControl,
+    NgModel,
+} from '@angular/forms';
 
 /**
  * Base class for every NG Smart field.
  *
  * Instead of bridging values through the ControlValueAccessor callbacks, it resolves the
- * FormControl the host is bound to (formControlName, ngModel, an injected control, or a new
+ * FormControl the host is bound to (formControlName, [formControl], ngModel, or a new
  * standalone one) and exposes it as `formControl`, so the inner Material input can bind to
  * that same control. Validators, touched state and errors are shared for free.
  *
@@ -16,7 +24,6 @@ import { ControlValueAccessor, FormControl, FormControlName, FormGroupDirective,
 @Directive()
 export abstract class ControlValueAccessorDirective implements ControlValueAccessor, OnInit {
     label = input<string>('');
-    injectedFormControl = input<FormControl | undefined>(undefined);
 
     computedLabel = computed<string>(this.getComputedLabelFn());
     getErrors = signal<string[]>([]);
@@ -50,18 +57,16 @@ export abstract class ControlValueAccessorDirective implements ControlValueAcces
     }
 
     setFormControl() {
-        const injectedFormControl = this.injectedFormControl();
-
-        if (injectedFormControl) {
-            this.control = injectedFormControl;
-            return;
-        }
-
         const ngControl = this._injector.get(NgControl, null, { self: true, optional: true });
 
         try {
             if (ngControl instanceof FormControlName) {
-                this.control = this._injector.get(FormGroupDirective).getControl(ngControl as FormControlName);
+                // FormControlName resolves its control in its own ngOnChanges, which runs after this
+                // component's ngOnInit, so the control is looked up in the parent FormGroupDirective.
+                this.control = this._injector.get(FormGroupDirective).getControl(ngControl);
+            } else if (ngControl instanceof FormControlDirective) {
+                // [formControl] receives the FormControl instance as an input, already set at this point.
+                this.control = ngControl.form;
             } else if (ngControl instanceof NgModel) {
                 this.control = ngControl.control;
 
