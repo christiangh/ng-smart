@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@ng-smart-input-fields-app": [
-        "modules/ng-smart-input-fields/src/index.ts"
+        "libs/ng-smart-input-fields/src/index.ts"
       ]
     }
   },

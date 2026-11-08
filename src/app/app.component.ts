@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FormsBoardComponent } from "./modules/forms-board.component";
+import { FormsBoardComponent } from "./features/forms-board/forms-board.component";
 
 @Component({
   standalone: true,

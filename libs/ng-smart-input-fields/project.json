@@ -1,7 +1,7 @@
 {
   "name": "ng-smart-input-fields",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "modules/ng-smart-input-fields/src",
+  "sourceRoot": "libs/ng-smart-input-fields/src",
   "prefix": "smart",
   "projectType": "library",
   "tags": [],
@@ -10,7 +10,7 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "modules/ng-smart-input-fields/jest.config.ts"
+        "jestConfig": "libs/ng-smart-input-fields/jest.config.ts"
       }
     },
     "lint": {
