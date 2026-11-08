@@ -13,9 +13,16 @@ NG Smart Input Fields is a smart approach to use Angular Material fields quicker
 
 ## Run tasks
 
+This workspace uses [pnpm](https://pnpm.io). Install dependencies with:
+
+```sh
+pnpm install
+```
+
+
 To run the dev server for showing the example app, use:
 
 ```sh
-npx nx serve ng-smart-input-fields-app
+pnpm nx serve ng-smart-input-fields-app
 ```
 

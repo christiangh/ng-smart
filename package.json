@@ -63,5 +63,15 @@
   },
   "nx": {
     "includedScripts": []
+  },
+  "packageManager": "pnpm@10.34.9",
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "esbuild",
+      "lmdb",
+      "msgpackr-extract",
+      "nx"
+    ]
   }
 }
