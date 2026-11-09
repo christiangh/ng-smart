@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "ng-smart-input-fields": [
-        "libs/ng-smart-input-fields/src/index.ts"
+      "@ng-smart/input-fields": [
+        "libs/ng-smart/input-fields/src/index.ts"
       ]
     }
   },

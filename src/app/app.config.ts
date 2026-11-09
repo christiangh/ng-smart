@@ -1,7 +1,7 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideNgSmartErrorMessages } from 'ng-smart-input-fields';
+import { provideNgSmartErrorMessages } from '@ng-smart/input-fields';
 import { appRoutes } from './app.routes';
 import { ERROR_MESSAGES } from './error-messages';
 

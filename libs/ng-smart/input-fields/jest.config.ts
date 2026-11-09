@@ -1,8 +1,8 @@
 export default {
-  displayName: 'ng-smart-input-fields',
-  preset: '../../jest.preset.js',
+  displayName: 'input-fields',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/libs/ng-smart-input-fields',
+  coverageDirectory: '../../../coverage/libs/ng-smart/input-fields',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgSmartInputComponent } from 'ng-smart-input-fields';
+import { NgSmartInputComponent } from '@ng-smart/input-fields';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
