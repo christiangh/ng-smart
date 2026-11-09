@@ -87,6 +87,10 @@ describe('NgSmartInputComponent', () => {
             expect(fixture.debugElement.query(By.css('mat-error')).nativeElement.textContent.trim()).toBe('required');
         });
 
+        it('shows the required marker from the parent control validators', () => {
+            expect(fixture.debugElement.query(By.css('.mat-mdc-form-field-required-marker'))).not.toBeNull();
+        });
+
         it('follows disable() and enable()', () => {
             control.disable();
             fixture.detectChanges();
