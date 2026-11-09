@@ -5,9 +5,18 @@ header {
     height: 5rem;
     padding: 1rem 2rem;
     border-bottom: 1px solid #BBCCBB;
-    
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    color: #BBCCBB;
+
+    .logo {
+        width: 2.5rem;
+        height: 2.5rem;
+        flex-shrink: 0;
+    }
+
     h1 {
-        color: #BBCCBB;
         font-size: 3rem;
         line-height: 3rem;
         @extend .jaro-font;

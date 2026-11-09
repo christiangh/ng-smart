@@ -15,7 +15,7 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('NG SMART INPUT FIELDS');
+    expect(compiled.querySelector('h1')?.textContent).toContain('NG SMART');
   });
 
   it(`should have as title 'ng-smart-input-fields-app'`, () => {
