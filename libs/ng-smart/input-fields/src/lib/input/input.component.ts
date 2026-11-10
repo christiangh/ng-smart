@@ -1,13 +1,13 @@
 import { Component, forwardRef, input } from '@angular/core';
-import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { ControlValueAccessorDirective } from '../utils/control-value-accessor.directive';
+import { NgSmartFieldDirective } from '../utils/smart-field.directive';
 import { NgSmartInputType } from './input.model';
 
 @Component({
     selector: 'ng-smart-input',
     standalone: true,
-    imports: [FormsModule, ReactiveFormsModule, MatInputModule],
+    imports: [ReactiveFormsModule, MatInputModule],
     templateUrl: './input.component.html',
     providers: [
         {
@@ -17,7 +17,7 @@ import { NgSmartInputType } from './input.model';
         },
     ],
 })
-export class NgSmartInputComponent extends ControlValueAccessorDirective {
+export class NgSmartInputComponent extends NgSmartFieldDirective {
     placeholder = input<string>('');
     type = input<NgSmartInputType>('text');
     autocomplete = input<string | null>(null);

@@ -23,15 +23,14 @@ import { NG_SMART_ERROR_RESOLVER } from './error-messages';
  * It has no selector: it is not used in templates, only extended by field components.
  */
 @Directive()
-export abstract class ControlValueAccessorDirective implements ControlValueAccessor, OnInit {
+export abstract class NgSmartFieldDirective implements ControlValueAccessor, OnInit {
     label = input<string>('');
 
-    computedLabel = computed<string>(this.getComputedLabelFn());
     // Signals read by the error resolver (e.g. the active language) also trigger a recompute.
     getErrors = computed<string[]>(() => {
         this._errorsVersion();
         const errors = this.control?.errors || {};
-        const label = this.computedLabel();
+        const label = this.label();
 
         return Object.entries(errors).map(([key, error]) => this._errorResolver({ key, error, label }));
     });
@@ -53,20 +52,6 @@ export abstract class ControlValueAccessorDirective implements ControlValueAcces
     ngOnInit() {
         this.setFormControl();
         this.subscribeToFormControl();
-        this.componentOnInit();
-    }
-
-    // Function to be overwritten in case we need to add something else in the ng on init function when extending the directive
-    componentOnInit() {}
-
-    getComputedLabelFn() {
-        return () => {
-            if (this.label()) {
-                return this.label();
-            }
-
-            return '';
-        };
     }
 
     setFormControl() {
