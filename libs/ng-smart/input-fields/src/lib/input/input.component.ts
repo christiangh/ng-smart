@@ -1,5 +1,4 @@
-import { Component, computed, forwardRef, input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, forwardRef, input } from '@angular/core';
 import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { ControlValueAccessorDirective } from '../utils/control-value-accessor.directive';
@@ -8,9 +7,8 @@ import { NgSmartInputType } from './input.model';
 @Component({
     selector: 'ng-smart-input',
     standalone: true,
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, MatInputModule],
+    imports: [FormsModule, ReactiveFormsModule, MatInputModule],
     templateUrl: './input.component.html',
-    styleUrl: './input.component.scss',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -23,14 +21,4 @@ export class NgSmartInputComponent extends ControlValueAccessorDirective {
     placeholder = input<string>('');
     type = input<NgSmartInputType>('text');
     autocomplete = input<string | null>(null);
-
-    getClasses = computed<string>(() => {
-        const classes: string[] = [];
-
-        if (!this.computedLabel()) {
-            classes.push('mat-form-field--no-label');
-        }
-
-        return classes.join(' ');
-    });
 }

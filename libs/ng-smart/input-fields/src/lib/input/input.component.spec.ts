@@ -87,6 +87,15 @@ describe('NgSmartInputComponent', () => {
             expect(fixture.debugElement.query(By.css('mat-error')).nativeElement.textContent.trim()).toBe('required');
         });
 
+        it('shows every error message in one line', () => {
+            control.setErrors({ required: true, email: true });
+            control.markAsTouched();
+            fixture.detectChanges();
+            const error = fixture.debugElement.query(By.css('mat-error')).nativeElement;
+            expect(error.textContent.trim()).toBe('required, email');
+            expect(error.title).toBe('required, email');
+        });
+
         it('shows the required marker from the parent control validators', () => {
             expect(fixture.debugElement.query(By.css('.mat-mdc-form-field-required-marker'))).not.toBeNull();
         });

@@ -35,6 +35,8 @@ export abstract class ControlValueAccessorDirective implements ControlValueAcces
 
         return Object.entries(errors).map(([key, error]) => this._errorResolver({ key, error, label }));
     });
+    /** All error messages in one line, as shown under the field. */
+    errorText = computed<string>(() => this.getErrors().join(', '));
 
     private control!: FormControl;
     // FormControl errors are not signals: bumped on every status change so getErrors recomputes.
@@ -70,26 +72,22 @@ export abstract class ControlValueAccessorDirective implements ControlValueAcces
     setFormControl() {
         const ngControl = this._injector.get(NgControl, null, { self: true, optional: true });
 
-        try {
-            if (ngControl instanceof FormControlName) {
-                // FormControlName resolves its control in its own ngOnChanges, which runs after this
-                // component's ngOnInit, so the control is looked up in the parent FormGroupDirective.
-                this.control = this._injector.get(FormGroupDirective).getControl(ngControl);
-            } else if (ngControl instanceof FormControlDirective) {
-                // [formControl] receives the FormControl instance as an input, already set at this point.
-                this.control = ngControl.form;
-            } else if (ngControl instanceof NgModel) {
-                this.control = ngControl.control;
+        if (ngControl instanceof FormControlName) {
+            // FormControlName resolves its control in its own ngOnChanges, which runs after this
+            // component's ngOnInit, so the control is looked up in the parent FormGroupDirective.
+            this.control = this._injector.get(FormGroupDirective).getControl(ngControl);
+        } else if (ngControl instanceof FormControlDirective) {
+            // [formControl] receives the FormControl instance as an input, already set at this point.
+            this.control = ngControl.form;
+        } else if (ngControl instanceof NgModel) {
+            this.control = ngControl.control;
 
-                ngControl.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(value => {
-                    if (ngControl.model !== value || ngControl.viewModel !== value) {
-                        ngControl.viewToModelUpdate(value);
-                    }
-                });
-            } else {
-                this.control = new FormControl();
-            }
-        } catch {
+            ngControl.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(value => {
+                if (ngControl.model !== value || ngControl.viewModel !== value) {
+                    ngControl.viewToModelUpdate(value);
+                }
+            });
+        } else {
             this.control = new FormControl();
         }
     }

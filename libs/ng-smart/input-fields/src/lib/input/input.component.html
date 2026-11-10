@@ -1,4 +1,4 @@
-<mat-form-field class="ng-smart-input__container" [ngClass]="getClasses()">
+<mat-form-field class="ng-smart-input__container">
     @if(computedLabel()) {
     <mat-label class="ng-smart-input__label">{{ computedLabel() }}</mat-label>
     }
@@ -11,7 +11,7 @@
         [placeholder]="placeholder()"
         [attr.autocomplete]="autocomplete() ? autocomplete() : null" />
 
-    <mat-error class="ng-smart-input__error" [title]="getErrors()">
-        {{ getErrors() }}
+    <mat-error class="ng-smart-input__error" [title]="errorText()">
+        {{ errorText() }}
     </mat-error>
 </mat-form-field>
