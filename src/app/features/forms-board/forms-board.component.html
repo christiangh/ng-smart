@@ -4,15 +4,15 @@
             <h4>Input in a form</h4>
         </div>
         <div class="board-body">
-            <form [formGroup]="smartFormGroup" class="smart-input-fields-container">
+            <form [formGroup]="formGroup" class="smart-input-fields-container">
                 <ng-smart-input label="Text input field" formControlName="textInput"></ng-smart-input>
                 <ng-smart-input label="Default text" formControlName="textInputDefault"></ng-smart-input>
                 <ng-smart-input label="Required text" formControlName="textInputRequired"></ng-smart-input>
             </form>
             <div class="blackboard">
-                <p>Text input field: <span>{{ smartFormGroup.get('textInput')?.value }}</span></p>
-                <p>Default text: <span>{{ smartFormGroup.get('textInputDefault')?.value }}</span></p>
-                <p>Required text: <span>{{ smartFormGroup.get('textInputRequired')?.value }}</span></p>
+                <p>Text input field: <span>{{ formGroup.controls.textInput.value }}</span></p>
+                <p>Default text: <span>{{ formGroup.controls.textInputDefault.value }}</span></p>
+                <p>Required text: <span>{{ formGroup.controls.textInputRequired.value }}</span></p>
             </div>
         </div>
     </section>
