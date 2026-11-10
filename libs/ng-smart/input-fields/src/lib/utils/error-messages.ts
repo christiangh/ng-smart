@@ -18,10 +18,13 @@ export interface NgSmartErrorContext {
  */
 export type NgSmartErrorResolver = (context: NgSmartErrorContext) => string;
 
+/** Default resolver: shows the error key as is. */
+const showErrorKey: NgSmartErrorResolver = ({ key }) => key;
+
 /** Resolver used by every NG Smart field. By default it shows the error key as is. */
 export const NG_SMART_ERROR_RESOLVER = new InjectionToken<NgSmartErrorResolver>('NG_SMART_ERROR_RESOLVER', {
     providedIn: 'root',
-    factory: () => ({ key }) => key,
+    factory: () => showErrorKey,
 });
 
 /**

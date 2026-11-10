@@ -4,7 +4,7 @@ import { AbstractControl, FormControl, ReactiveFormsModule, Validators } from '@
 import { By } from '@angular/platform-browser';
 import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { NgSmartInputComponent } from '../input/input.component';
-import { provideNgSmartErrorMessages, provideNgSmartErrorResolver } from './error-messages';
+import { NgSmartErrorResolver, provideNgSmartErrorMessages, provideNgSmartErrorResolver } from './error-messages';
 
 const forbiddenValidator = (control: AbstractControl) => (control.value === 'admin' ? { forbidden: true } : null);
 
@@ -87,7 +87,8 @@ describe('Error messages', () => {
 
     describe('with provideNgSmartErrorResolver', () => {
         it('lets a translation function build every message', () => {
-            const fixture = setup([provideNgSmartErrorResolver(() => ({ key, label }) => `[${key}] ${label}`)]);
+            const resolver: NgSmartErrorResolver = ({ key, label }) => `[${key}] ${label}`;
+            const fixture = setup([provideNgSmartErrorResolver(() => resolver)]);
             expect(errorsOf(fixture, '.labelled')).toEqual(['[required] Name']);
         });
 
