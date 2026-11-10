@@ -5,6 +5,6 @@ import { NgSmartErrorMessage } from '@ng-smart/input-fields';
  * Errors without an entry show their key.
  */
 export const ERROR_MESSAGES = {
-  required: ({ label }) => `${label} is required`,
-  minlength: ({ label, error }) => `${label} must be at least ${error.requiredLength} characters`,
+	required: ({ label }) => `${label} is required`,
+	minlength: ({ label, error }) => `${label} must be at least ${error.requiredLength} characters`,
 } satisfies Record<string, NgSmartErrorMessage>;

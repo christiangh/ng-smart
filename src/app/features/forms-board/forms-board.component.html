@@ -1,67 +1,85 @@
 <div class="forms-board-container">
-    <section class="form-section board-section">
-        <div class="board-header">
-            <h4>Input in a form</h4>
-        </div>
-        <div class="board-body">
-            <form [formGroup]="formGroup" class="smart-input-fields-container">
-                <ng-smart-input label="Text input field" formControlName="textInput"></ng-smart-input>
-                <ng-smart-input label="Default text" formControlName="textInputDefault"></ng-smart-input>
-                <ng-smart-input label="Required text" formControlName="textInputRequired"></ng-smart-input>
-            </form>
-            <div class="blackboard">
-                <p>Text input field: <span>{{ formGroup.controls.textInput.value }}</span></p>
-                <p>Default text: <span>{{ formGroup.controls.textInputDefault.value }}</span></p>
-                <p>Required text: <span>{{ formGroup.controls.textInputRequired.value }}</span></p>
-            </div>
-        </div>
-    </section>
+	<section class="form-section board-section">
+		<div class="board-header">
+			<h4>Input in a form</h4>
+		</div>
+		<div class="board-body">
+			<form [formGroup]="formGroup" class="smart-input-fields-container">
+				<ng-smart-input label="Text input field" formControlName="textInput"></ng-smart-input>
+				<ng-smart-input label="Default text" formControlName="textInputDefault"></ng-smart-input>
+				<ng-smart-input label="Required text" formControlName="textInputRequired"></ng-smart-input>
+			</form>
+			<div class="blackboard">
+				<p>
+					Text input field: <span>{{ formGroup.controls.textInput.value }}</span>
+				</p>
+				<p>
+					Default text: <span>{{ formGroup.controls.textInputDefault.value }}</span>
+				</p>
+				<p>
+					Required text: <span>{{ formGroup.controls.textInputRequired.value }}</span>
+				</p>
+			</div>
+		</div>
+	</section>
 
-    <section class="form-control-section board-section">
-        <div class="board-header">
-            <h4>Form control</h4>
-        </div>
-        <div class="board-body">
-            <div class="smart-input-fields-container">
-                <ng-smart-input label="Text input field" [formControl]="textInputControl"></ng-smart-input>
-                <ng-smart-input label="Default text" [formControl]="textInputDefaultControl"></ng-smart-input>
-                <ng-smart-input label="Required text" [formControl]="textInputRequiredControl"></ng-smart-input>
-            </div>
-            <div class="blackboard">
-                <p>Text input field (formControl): <span>{{ textInputControl.value }}</span></p>
-                <p>Default text (formControl): <span>{{ textInputDefaultControl.value }}</span></p>
-                <p>Required text (formControl): <span>{{ textInputRequiredControl.value }}</span></p>
-            </div>
-        </div>
-    </section>
+	<section class="form-control-section board-section">
+		<div class="board-header">
+			<h4>Form control</h4>
+		</div>
+		<div class="board-body">
+			<div class="smart-input-fields-container">
+				<ng-smart-input label="Text input field" [formControl]="textInputControl"></ng-smart-input>
+				<ng-smart-input label="Default text" [formControl]="textInputDefaultControl"></ng-smart-input>
+				<ng-smart-input label="Required text" [formControl]="textInputRequiredControl"></ng-smart-input>
+			</div>
+			<div class="blackboard">
+				<p>
+					Text input field (formControl): <span>{{ textInputControl.value }}</span>
+				</p>
+				<p>
+					Default text (formControl): <span>{{ textInputDefaultControl.value }}</span>
+				</p>
+				<p>
+					Required text (formControl): <span>{{ textInputRequiredControl.value }}</span>
+				</p>
+			</div>
+		</div>
+	</section>
 
-    <section class="ng-model-section board-section">
-        <div class="board-header">
-            <h4>NgModel</h4>
-        </div>
-        <div class="board-body">
-            <div class="smart-input-fields-container">
-                <ng-smart-input label="Text input field" [(ngModel)]="textInputNgModel"></ng-smart-input>
-                <ng-smart-input label="Default text" [(ngModel)]="textInputDefaultNgModel"></ng-smart-input>
-            </div>
-            <div class="blackboard">
-                <p>Text input field (ngModel): <span>{{ textInputNgModel }}</span></p>
-                <p>Default text (ngModel): <span>{{ textInputDefaultNgModel }}</span></p>
-            </div>
-        </div>
-    </section>
+	<section class="ng-model-section board-section">
+		<div class="board-header">
+			<h4>NgModel</h4>
+		</div>
+		<div class="board-body">
+			<div class="smart-input-fields-container">
+				<ng-smart-input label="Text input field" [(ngModel)]="textInputNgModel"></ng-smart-input>
+				<ng-smart-input label="Default text" [(ngModel)]="textInputDefaultNgModel"></ng-smart-input>
+			</div>
+			<div class="blackboard">
+				<p>
+					Text input field (ngModel): <span>{{ textInputNgModel }}</span>
+				</p>
+				<p>
+					Default text (ngModel): <span>{{ textInputDefaultNgModel }}</span>
+				</p>
+			</div>
+		</div>
+	</section>
 
-    <section class="free-section board-section">
-        <div class="board-header">
-            <h4>Free</h4>
-        </div>
-        <div class="board-body">
-            <div class="smart-input-fields-container">
-                <ng-smart-input #ngSmartInput label="Text input field"></ng-smart-input>
-            </div>
-            <div class="blackboard">
-                <p>Text input field (reference): <span>{{ ngSmartInput.getValue() }}</span></p>
-            </div>
-        </div>
-    </section>
+	<section class="free-section board-section">
+		<div class="board-header">
+			<h4>Free</h4>
+		</div>
+		<div class="board-body">
+			<div class="smart-input-fields-container">
+				<ng-smart-input #ngSmartInput label="Text input field"></ng-smart-input>
+			</div>
+			<div class="blackboard">
+				<p>
+					Text input field (reference): <span>{{ ngSmartInput.getValue() }}</span>
+				</p>
+			</div>
+		</div>
+	</section>
 </div>

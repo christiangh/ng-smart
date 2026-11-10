@@ -2,12 +2,12 @@ import { InjectionToken, Provider } from '@angular/core';
 
 /** Data available to build the message of one validation error. */
 export interface NgSmartErrorContext {
-    /** Validation error key: `required`, `minlength`, or a custom validator key. */
-    key: string;
-    /** Value set by the validator, e.g. `{ requiredLength, actualLength }` for `minlength`. */
-    error: any; // eslint-disable-line @typescript-eslint/no-explicit-any
-    /** Field label, or an empty string when the field has none. */
-    label: string;
+	/** Validation error key: `required`, `minlength`, or a custom validator key. */
+	key: string;
+	/** Value set by the validator, e.g. `{ requiredLength, actualLength }` for `minlength`. */
+	error: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+	/** Field label, or an empty string when the field has none. */
+	label: string;
 }
 
 /**
@@ -23,8 +23,8 @@ const showErrorKey: NgSmartErrorResolver = ({ key }) => key;
 
 /** Resolver used by every NG Smart field. By default it shows the error key as is. */
 export const NG_SMART_ERROR_RESOLVER = new InjectionToken<NgSmartErrorResolver>('NG_SMART_ERROR_RESOLVER', {
-    providedIn: 'root',
-    factory: () => showErrorKey,
+	providedIn: 'root',
+	factory: () => showErrorKey,
 });
 
 /**
@@ -38,7 +38,7 @@ export const NG_SMART_ERROR_RESOLVER = new InjectionToken<NgSmartErrorResolver>(
  * })
  */
 export function provideNgSmartErrorResolver(factory: () => NgSmartErrorResolver): Provider {
-    return { provide: NG_SMART_ERROR_RESOLVER, useFactory: factory };
+	return { provide: NG_SMART_ERROR_RESOLVER, useFactory: factory };
 }
 
 /** A fixed text, or a function to build it from the error context. */
@@ -55,13 +55,13 @@ export type NgSmartErrorMessage = string | ((context: NgSmartErrorContext) => st
  * })
  */
 export function provideNgSmartErrorMessages(messages: Record<string, NgSmartErrorMessage>): Provider {
-    return provideNgSmartErrorResolver(() => context => {
-        const message = messages[context.key];
+	return provideNgSmartErrorResolver(() => context => {
+		const message = messages[context.key];
 
-        if (message === undefined) {
-            return context.key;
-        }
+		if (message === undefined) {
+			return context.key;
+		}
 
-        return typeof message === 'function' ? message(context) : message;
-    });
+		return typeof message === 'function' ? message(context) : message;
+	});
 }

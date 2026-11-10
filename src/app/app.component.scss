@@ -1,30 +1,30 @@
 @import '../assets/styles/jaro-font.scss';
 
 header {
-    width: 100%;
-    height: 5rem;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid #BBCCBB;
-    display: flex;
-    align-items: center;
-    gap: 0.875rem;
-    color: #BBCCBB;
+	width: 100%;
+	height: 5rem;
+	padding: 1rem 2rem;
+	border-bottom: 1px solid #bbccbb;
+	display: flex;
+	align-items: center;
+	gap: 0.875rem;
+	color: #bbccbb;
 
-    .logo {
-        width: 2.5rem;
-        height: 2.5rem;
-        flex-shrink: 0;
-    }
+	.logo {
+		width: 2.5rem;
+		height: 2.5rem;
+		flex-shrink: 0;
+	}
 
-    h1 {
-        font-size: 3rem;
-        line-height: 3rem;
-        @extend .jaro-font;
-    }
+	h1 {
+		font-size: 3rem;
+		line-height: 3rem;
+		@extend .jaro-font;
+	}
 }
 
 .main-body {
-    width: 100%;
-    height: calc(100vh - 5rem);
-    padding: 1rem 2rem;
+	width: 100%;
+	height: calc(100vh - 5rem);
+	padding: 1rem 2rem;
 }

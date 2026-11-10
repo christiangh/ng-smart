@@ -1,58 +1,58 @@
 @import '../../../assets/styles/jaro-font.scss';
 
 .forms-board-container {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 3rem;
-    padding-bottom: 1rem;
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-flow: column nowrap;
+	gap: 3rem;
+	padding-bottom: 1rem;
 
-    .board-section {
-        width: 100%;
-        height: auto;
-        border: 1px solid #BBCCBB;
+	.board-section {
+		width: 100%;
+		height: auto;
+		border: 1px solid #bbccbb;
 
-        .board-header {
-            width: 100%;
-            height: auto;
-            padding: 0.5rem 1.5rem;
-            background-color: #BBCCBB;
-            color: #31343A;
-            @extend .jaro-font;
-        }
+		.board-header {
+			width: 100%;
+			height: auto;
+			padding: 0.5rem 1.5rem;
+			background-color: #bbccbb;
+			color: #31343a;
+			@extend .jaro-font;
+		}
 
-        .board-body {
-            width: 100%;
-            height: auto;
-            padding: 1rem 1rem;
-            background-color: #FFFFFF;
-            display: flex;
-            gap: 2rem;
+		.board-body {
+			width: 100%;
+			height: auto;
+			padding: 1rem 1rem;
+			background-color: #ffffff;
+			display: flex;
+			gap: 2rem;
 
-            .smart-input-fields-container {
-                width: 212px;
-                display: flex;
-                flex-flow: column wrap;
-                gap: 1rem;
-            }
+			.smart-input-fields-container {
+				width: 212px;
+				display: flex;
+				flex-flow: column wrap;
+				gap: 1rem;
+			}
 
-            .blackboard {
-                flex: 1;
-                display: flex;
-                flex-flow: column wrap;
-                gap: 1rem;
-                background-color: #BBCCBB;
-                color: #31343A;
-                padding: 1rem;
-                border-radius: 0.4em;
-                @extend .jaro-font;
+			.blackboard {
+				flex: 1;
+				display: flex;
+				flex-flow: column wrap;
+				gap: 1rem;
+				background-color: #bbccbb;
+				color: #31343a;
+				padding: 1rem;
+				border-radius: 0.4em;
+				@extend .jaro-font;
 
-                span {
-                    color: #FFFFFF;
-                    margin-left: 0.2rem;
-                }
-            }
-        }
-    }
+				span {
+					color: #ffffff;
+					margin-left: 0.2rem;
+				}
+			}
+		}
+	}
 }

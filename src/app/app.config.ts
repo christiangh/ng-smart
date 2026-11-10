@@ -6,12 +6,12 @@ import { appRoutes } from './app.routes';
 import { ERROR_MESSAGES } from './error-messages';
 
 export const appConfig: ApplicationConfig = {
-  providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
-    provideAnimations(),
-    // Error texts for every NG Smart field. Errors without an entry show their key.
-    // To use a translation library instead, see provideNgSmartErrorResolver().
-    provideNgSmartErrorMessages(ERROR_MESSAGES),
-  ],
+	providers: [
+		provideZoneChangeDetection({ eventCoalescing: true }),
+		provideRouter(appRoutes),
+		provideAnimations(),
+		// Error texts for every NG Smart field. Errors without an entry show their key.
+		// To use a translation library instead, see provideNgSmartErrorResolver().
+		provideNgSmartErrorMessages(ERROR_MESSAGES),
+	],
 };

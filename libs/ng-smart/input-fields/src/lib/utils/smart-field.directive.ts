@@ -2,13 +2,13 @@
 import { computed, DestroyRef, Directive, inject, Injector, input, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
-    ControlValueAccessor,
-    FormControl,
-    FormControlDirective,
-    FormControlName,
-    FormGroupDirective,
-    NgControl,
-    NgModel,
+	ControlValueAccessor,
+	FormControl,
+	FormControlDirective,
+	FormControlName,
+	FormGroupDirective,
+	NgControl,
+	NgModel,
 } from '@angular/forms';
 import { NG_SMART_ERROR_RESOLVER } from './error-messages';
 
@@ -24,78 +24,78 @@ import { NG_SMART_ERROR_RESOLVER } from './error-messages';
  */
 @Directive()
 export abstract class NgSmartFieldDirective implements ControlValueAccessor, OnInit {
-    label = input<string>('');
+	label = input<string>('');
 
-    // Signals read by the error resolver (e.g. the active language) also trigger a recompute.
-    getErrors = computed<string[]>(() => {
-        this._errorsVersion();
-        const errors = this.control?.errors || {};
-        const label = this.label();
+	// Signals read by the error resolver (e.g. the active language) also trigger a recompute.
+	getErrors = computed<string[]>(() => {
+		this._errorsVersion();
+		const errors = this.control?.errors || {};
+		const label = this.label();
 
-        return Object.entries(errors).map(([key, error]) => this._errorResolver({ key, error, label }));
-    });
-    /** All error messages in one line, as shown under the field. */
-    errorText = computed<string>(() => this.getErrors().join(', '));
+		return Object.entries(errors).map(([key, error]) => this._errorResolver({ key, error, label }));
+	});
+	/** All error messages in one line, as shown under the field. */
+	errorText = computed<string>(() => this.getErrors().join(', '));
 
-    private control!: FormControl;
-    // FormControl errors are not signals: bumped on every status change so getErrors recomputes.
-    private _errorsVersion = signal(0);
+	private control!: FormControl;
+	// FormControl errors are not signals: bumped on every status change so getErrors recomputes.
+	private _errorsVersion = signal(0);
 
-    protected _destroyRef = inject(DestroyRef);
-    protected _injector = inject(Injector);
-    protected _errorResolver = inject(NG_SMART_ERROR_RESOLVER);
+	protected _destroyRef = inject(DestroyRef);
+	protected _injector = inject(Injector);
+	protected _errorResolver = inject(NG_SMART_ERROR_RESOLVER);
 
-    get formControl(): FormControl {
-        return this.control;
-    }
+	get formControl(): FormControl {
+		return this.control;
+	}
 
-    ngOnInit() {
-        this.setFormControl();
-        this.subscribeToFormControl();
-    }
+	ngOnInit() {
+		this.setFormControl();
+		this.subscribeToFormControl();
+	}
 
-    setFormControl() {
-        const ngControl = this._injector.get(NgControl, null, { self: true, optional: true });
+	setFormControl() {
+		const ngControl = this._injector.get(NgControl, null, { self: true, optional: true });
 
-        if (ngControl instanceof FormControlName) {
-            // FormControlName resolves its control in its own ngOnChanges, which runs after this
-            // component's ngOnInit, so the control is looked up in the parent FormGroupDirective.
-            this.control = this._injector.get(FormGroupDirective).getControl(ngControl);
-        } else if (ngControl instanceof FormControlDirective) {
-            // [formControl] receives the FormControl instance as an input, already set at this point.
-            this.control = ngControl.form;
-        } else if (ngControl instanceof NgModel) {
-            this.control = ngControl.control;
+		if (ngControl instanceof FormControlName) {
+			// FormControlName resolves its control in its own ngOnChanges, which runs after this
+			// component's ngOnInit, so the control is looked up in the parent FormGroupDirective.
+			this.control = this._injector.get(FormGroupDirective).getControl(ngControl);
+		} else if (ngControl instanceof FormControlDirective) {
+			// [formControl] receives the FormControl instance as an input, already set at this point.
+			this.control = ngControl.form;
+		} else if (ngControl instanceof NgModel) {
+			this.control = ngControl.control;
 
-            ngControl.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(value => {
-                if (ngControl.model !== value || ngControl.viewModel !== value) {
-                    ngControl.viewToModelUpdate(value);
-                }
-            });
-        } else {
-            this.control = new FormControl();
-        }
-    }
+			ngControl.control.valueChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(value => {
+				if (ngControl.model !== value || ngControl.viewModel !== value) {
+					ngControl.viewToModelUpdate(value);
+				}
+			});
+		} else {
+			this.control = new FormControl();
+		}
+	}
 
-    subscribeToFormControl() {
-        this.formControl.statusChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
-            this.updateFieldErrors();
-        });
-        // We check the original status
-        this.updateFieldErrors();
-    }
+	subscribeToFormControl() {
+		this.formControl.statusChanges.pipe(takeUntilDestroyed(this._destroyRef)).subscribe(() => {
+			this.updateFieldErrors();
+		});
+		// We check the original status
+		this.updateFieldErrors();
+	}
 
-    updateFieldErrors() {
-        this._errorsVersion.update(version => version + 1);
-    }
+	updateFieldErrors() {
+		this._errorsVersion.update(version => version + 1);
+	}
 
-    getValue(): unknown {
-        return this.control.value;
-    }
+	getValue(): unknown {
+		return this.control.value;
+	}
 
-    // The ControlValueAccessor callbacks are intentionally empty: the field shares the parent's
-    // FormControl with its inner input, so there is nothing to bridge.
-    writeValue() {}
-    registerOnChange() {}
-    registerOnTouched() {}
+	// The ControlValueAccessor callbacks are intentionally empty: the field shares the parent's
+	// FormControl with its inner input, so there is nothing to bridge.
+	writeValue() {}
+	registerOnChange() {}
+	registerOnTouched() {}
 }
