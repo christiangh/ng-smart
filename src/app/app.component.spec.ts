@@ -18,9 +18,9 @@ describe('AppComponent', () => {
 		expect(compiled.querySelector('h1')?.textContent).toContain('NG SMART');
 	});
 
-	it(`should have as title 'ng-smart-input-fields-app'`, () => {
+	it(`should have as title 'ng-smart'`, () => {
 		const fixture = TestBed.createComponent(AppComponent);
 		const app = fixture.componentInstance;
-		expect(app.title).toEqual('ng-smart-input-fields-app');
+		expect(app.title).toEqual('ng-smart');
 	});
 });

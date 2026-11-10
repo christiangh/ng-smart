@@ -10,5 +10,5 @@ import { FormsBoardComponent } from './features/forms-board/forms-board.componen
 	styleUrl: './app.component.scss',
 })
 export class AppComponent {
-	title = 'ng-smart-input-fields-app';
+	title = 'ng-smart';
 }

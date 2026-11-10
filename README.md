@@ -1,4 +1,4 @@
-# NgSmartInputFieldsApp
+# NG Smart
 
 <img src="/public/images/ngs.png" width="45">
 
@@ -22,5 +22,5 @@ pnpm install
 To run the dev server for showing the example app, use:
 
 ```sh
-pnpm nx serve ng-smart-input-fields-app
+pnpm nx serve ng-smart
 ```
